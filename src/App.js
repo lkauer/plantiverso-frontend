@@ -1,9 +1,10 @@
 import React , { Component } from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 import Home from './components/frontend/Home';
-import MainLayout from './layouts/admin/MainLayout'
-import Login from './components/frontend/auth/Login'
-import Register from './components/frontend/auth/Register'
+import MainLayout from './layouts/admin/MainLayout';
+import Login from './components/frontend/auth/Login';
+import Register from './components/frontend/auth/Register';
+import AdminPrivateRoute from './AdminPrivateRoute';
 import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:8000';
@@ -31,7 +32,8 @@ class App extends Component {
             <Route path="/register">
                 {localStorage.getItem('auth_token') ? <Redirect to='/'/> : <Register/>}
             </Route>
-            <Route path="/admin" name="Admin" render={(props) => <MainLayout {...props} />} />
+            <AdminPrivateRoute path="/admin" name="Admin" />
+            {/* <Route path="/admin" name="Admin" render={(props) => <MainLayout {...props} />} /> */}
           </Switch>
         </Router>
       </div>
