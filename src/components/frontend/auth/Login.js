@@ -33,7 +33,7 @@ function Login(){
                     localStorage.setItem('auth_token' , res.data.token);
                     localStorage.setItem('auth_name' , res.data.username);
                     swal('Success', res.data.message, 'success');
-                    history.push('/');
+                    history.push('/admin/feed');
                 }else if(res.data.status === 401){
                     swal('Warning', res.data.message, 'warning');
                 }else{

@@ -1,4 +1,3 @@
-import Dashboard from '../components/admin/Dashboard';
 import Profile from '../components/admin/Profile';
 import Feed from '../components/admin/Feed';
 import Catalog from '../components/admin/Catalog';
@@ -8,7 +7,6 @@ import Forum from '../components/admin/Forum';
 
 const routes = [
     {path: '/admin', exact: true, name: 'Admin'},
-    {path: '/admin/dashboard', exact: true, name: 'Dashboard', component: Dashboard},
     {path: '/admin/profile', exact: true, name: 'Profile', component: Profile},
     {path: '/admin/feed', exact: true, name: 'Feed', component: Feed},
     {path: '/admin/catalog', exact: true, name: 'Catalog', component: Catalog},

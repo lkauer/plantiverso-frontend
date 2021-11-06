@@ -36,7 +36,7 @@ const MainLayout = () => {
                                     )
                                 })
                             }
-                            <Redirect from="/admin" to="/admin/dashboard"/>
+                            <Redirect from="/admin" to="/admin/feed"/>
                         </Switch>
                     </main>
                     <Footer/>

@@ -1,6 +1,5 @@
 import React , { Component } from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import Home from './components/frontend/Home';
 import MainLayout from './layouts/admin/MainLayout';
 import Login from './components/frontend/auth/Login';
 import Register from './components/frontend/auth/Register';
@@ -23,7 +22,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={Login}/>
             {/* <Route path="/login" component={Login}/> */}
             {/* <Route path="/register" component={Register}/> */}
             <Route path="/login">
