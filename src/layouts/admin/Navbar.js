@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+import logo from '../../../public/assets/img/logo.jpeg'
 
 const Navbar = () => {
 
@@ -27,7 +28,7 @@ const Navbar = () => {
     return (
         <nav className="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             
-            <Link to="/admin" className="navbar-brand ps-3">Start Bootstrap</Link>
+            <Link to="/admin" className="navbar-brand ps-3"><img src={logo} className="rounded-circle" style={{width:"50px", height: "auto"}}/></Link>
             <button className="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i className="fas fa-bars"></i></button>
             <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             </div>

@@ -14,7 +14,8 @@ function Profile(){
                     <div className="form-group mb-3">
                         <label>Senha</label>
                         <input type="password" name="password" className="form-control"></input>
-                        <span> </span>
+                        <br></br>
+                        <button type="submit" className="btn btn-primary"> Alterar senha </button>
                     </div>
                     <div className="form-group mb-3">
                         <label>E-mail</label>

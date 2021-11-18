@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Navbar  from '../../../layouts/frontend/Navbar';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+import logo from '../../../../public/assets/img/logo.jpeg'
+import {Link} from 'react-router-dom';
 
 function Register(){
 
@@ -51,7 +53,8 @@ function Register(){
                 <div className="col-md-6">
                     <div className="card">
                         <div className="card-header">
-                            <h4>Register</h4>
+                            <h4>Cadastro</h4>
+                            <Link to="/" className="navbar-brand ps-3"><img src={logo} className="rounded-circle text-center" style={{width:"100px", height: "auto"}}/></Link>
                         </div>
                         <div className="card-body">
                             <form onSubmit={registerInputSubmit}>
