@@ -45,6 +45,10 @@ function Login(){
         });
     }
 
+    if(localStorage.getItem('auth_token')){
+        history.push('/admin/feed');
+    }
+
     return(
         <div>
         <Navbar/>

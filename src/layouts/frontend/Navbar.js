@@ -36,12 +36,6 @@ function Navbar(){
                 </li>
             </ul>
         )
-    }else{
-        AuthButtons = (
-            <li className="nav-item">
-                <button onClick={logoutSubmit} type="button" className="nav-link btn btn-danger btn-sm text-white" to="">Logout</button>
-            </li>
-        );
     }
 
     return(
@@ -52,7 +46,14 @@ function Navbar(){
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul className="navbar-nav ms-auto">
-                        {AuthButtons}
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <Link className="nav-link text-secondary" to="/register">Register</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link text-secondary" to="/login">Login</Link>
+                            </li>
+                        </ul>
                     </ul>
                 </div>
             </nav>
