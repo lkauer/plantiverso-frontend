@@ -8,7 +8,6 @@ function ViewGeneralForum(){
     const [forumList, setForumList] = useState([]);
     useEffect(() => {
         axios.get(`/api/view-general-forum`).then(res => {
-            console.log(res.data)
             if(res.status === 200){
                 setForumList(res.data.forum);
             }

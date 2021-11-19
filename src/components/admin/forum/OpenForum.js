@@ -4,7 +4,6 @@ import swal from 'sweetalert';
 import { Link, useHistory } from 'react-router-dom';
 
 function OpenForum(props){
-    console.log(props)
     const history = useHistory();
     const [loading, setLoading] = useState(true);
     // const [error, setError] = useState({});
@@ -45,8 +44,7 @@ function OpenForum(props){
 
         axios.post(`/api/store-forum-post`, data).then( res => {
             if(res.data.status === 200){
-                // history.push('/admin/open-forum/2');
-                window.location.reload();
+                history.push('/admin/view-forum');
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
             }
@@ -61,7 +59,6 @@ function OpenForum(props){
             return (
                 <div className="list-group-item list-group-item-action" aria-current="true">
                     <div className="d-flex w-100 justify-content-between">
-                    {/* <h5 className="mb-1">{item.title}</h5> */}
                     <small><b>{item.user_name}</b> - {item.created_at}</small>
                     </div>
                     <br></br>

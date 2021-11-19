@@ -16,7 +16,8 @@ function Catalog(){
         // image,
         error_list: []
     });
-
+    
+    axios.cors()
     useEffect(() => {
         axios.get(`/api/all-categories/`).then(res => {
             if(res.data.status === 200){

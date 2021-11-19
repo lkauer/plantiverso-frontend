@@ -51,7 +51,6 @@ function EditCatalog(props){
         const formData = new FormData();
         formData.append('image', picture.picture);
         formData.append('name', catalogInput.name);
-        console.log(catalogInput.name)
         formData.append('description', catalogInput.description);
         formData.append('category', catalogInput.category);
 

@@ -39,25 +39,20 @@ function ViewForum(){
     }else{
         ViewForum_HTML = forumList.map((item) => {
             return (
-                <tr>
-                    <td>
-                        <div>
-                            <div className="list-group-item list-group-item-action" aria-current="true">
-                                <div className="d-flex w-100 justify-content-between">
-                                <h5 className="mb-1">{item.title}</h5>
-                                <small>20/05/1999</small>
-                                <Link to={`open-forum/${item.id}`}> <button className="btn btn-primary">Acessar</button> </Link>
-                                <Link to={`edit-forum/${item.id}`}> <button className="btn btn-warning">Editar</button> </Link>
-                                <button onClick={ (e) => deleteForum(e, item.id)} className="btn btn-danger">Excluir</button>
-                                </div>
-                                <br></br>
-                                <p className="mb-1">{item.description}</p>
-                            </div>
-                        
-                        <br></br>
+                <div>
+                    <div className="list-group-item list-group-item-action" aria-current="true">
+                        <div className="d-flex w-100 justify-content-between">
+                        <h5 className="mb-1">{item.title}</h5>
+                        <small>20/05/1999</small>
+                        <Link to={`open-forum/${item.id}`}> <button className="btn btn-primary">Acessar</button> </Link>
+                        <Link to={`edit-forum/${item.id}`}> <button className="btn btn-warning">Editar</button> </Link>
+                        <button onClick={ (e) => deleteForum(e, item.id)} className="btn btn-danger">Excluir</button>
                         </div>
-                    </td>
-                </tr>
+                        <br></br>
+                        <p className="mb-1">{item.description}</p>
+                    </div>
+                <br></br>
+                </div>
             )   
         });
     }
@@ -67,12 +62,7 @@ function ViewForum(){
             <div className="container py-5">
                 <h1>Meus tópicos</h1>
                 <div className="list-group">
-                    <table>
-                    <thead></thead>
-                    <tbody>
                     {ViewForum_HTML}
-                    </tbody>
-                    </table>
                 </div>
             </div>
         </div>
