@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 function Category(){
 
+    const history = useHistory();
     const [categoryInput, setCategory] = useState ({
         name : '',
         description : '',
@@ -27,6 +29,7 @@ function Category(){
         axios.post(`/api/store-category`, data).then( res => {
             if(res.data.status === 200){
                 swal("Success", res.data.message, "success");
+                history.push('/admin/view-category');
             }else if(res.data.status === 400){
                 setCategory({ ...categoryInput, error_list : res.data.errors});
             }

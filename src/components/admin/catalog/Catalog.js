@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 function Catalog(){
 
+    const history = useHistory();
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
     const [picture, setPicture] = useState([]);
@@ -11,7 +13,7 @@ function Catalog(){
         name : '',
         description : '',
         category : [],
-        // image_path
+        // image,
         error_list: []
     });
 
@@ -51,7 +53,7 @@ function Catalog(){
         axios.post(`/api/store-catalog`, formData).then( res => {
             if(res.data.status === 200){
                 swal("Success", res.data.message, "success");
-                //limpar campos
+                history.push('/admin/view-catalog');
             }else if(res.data.status === 400){
                 setCatalog({ ...catalogInput, error_list : res.data.errors});
             }

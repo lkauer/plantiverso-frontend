@@ -1,6 +1,5 @@
 import React , { Component } from 'react';
 import {BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-import MainLayout from './layouts/admin/MainLayout';
 import Login from './components/frontend/auth/Login';
 import Register from './components/frontend/auth/Register';
 import AdminPrivateRoute from './AdminPrivateRoute';

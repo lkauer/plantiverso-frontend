@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import { Link, useHistory } from 'react-router-dom';
 
 function OpenForum(props){
+    console.log(props)
     const history = useHistory();
     const [loading, setLoading] = useState(true);
     // const [error, setError] = useState({});
@@ -14,7 +15,6 @@ function OpenForum(props){
         const forum_id = props.match.params.id;
         axios.get(`/api/open-forum/${forum_id}`).then(res => {
             if(res.data.status === 200){
-                console.log(res.data.forumPost)
                 setPostList(res.data.forumPost);
                 setForum(res.data.forum)
             }else if(res.data.status === 404){
@@ -45,7 +45,8 @@ function OpenForum(props){
 
         axios.post(`/api/store-forum-post`, data).then( res => {
             if(res.data.status === 200){
-                swal("Success", res.data.message, "success");
+                // history.push('/admin/open-forum/2');
+                window.location.reload();
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
             }
@@ -58,15 +59,13 @@ function OpenForum(props){
     }else{
         forumPosts_HTML = postList.map((item) => {
             return (
-                <div>
-                <a href="#" className="list-group-item list-group-item-action" aria-current="true">
+                <div className="list-group-item list-group-item-action" aria-current="true">
                     <div className="d-flex w-100 justify-content-between">
                     {/* <h5 className="mb-1">{item.title}</h5> */}
                     <small><b>{item.user_name}</b> - {item.created_at}</small>
                     </div>
                     <br></br>
                     <p className="mb-1">{item.content}</p>
-                </a>
                 <br></br>
                 </div>
             )   

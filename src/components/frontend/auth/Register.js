@@ -58,7 +58,7 @@ function Register(){
                     <div className="card">
                         <div className="card-header">
                             <h4>Cadastro</h4>
-                            <Link to="/" className="navbar-brand ps-3"><img src={logo} className="rounded-circle text-center" style={{width:"100px", height: "auto"}}/></Link>
+                            <Link to="/" className="navbar-brand ps-3"><img src={logo} className="rounded-circle text-center" alt="logotipo" style={{width:"100px", height: "auto"}}/></Link>
                         </div>
                         <div className="card-body">
                             <form onSubmit={registerInputSubmit}>

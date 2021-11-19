@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { useHistory } from 'react-router-dom';
 
 function Forum(){
 
-    const [forumInput, setForum] = useState ({
+
+    const history = useHistory();    const [forumInput, setForum] = useState ({
         title : '',
         description : '',
         error_list: []
@@ -27,6 +29,7 @@ function Forum(){
         axios.post(`/api/store-forum`, data).then( res => {
             if(res.data.status === 200){
                 swal("Success", res.data.message, "success");
+                history.push('/admin/view-forum');
             }else if(res.data.status === 400){
                 setForum({ ...forumInput, error_list : res.data.errors});
             }

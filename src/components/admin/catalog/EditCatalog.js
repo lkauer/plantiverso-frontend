@@ -8,7 +8,14 @@ function EditCatalog(props){
     const history = useHistory();
     const [loading, setLoading] = useState(true);
     const [categoryList, setCategoryList] = useState([]);
-    const [catalogInput, setCatalog] = useState([]);
+    const [picture, setPicture] = useState([]);
+    const [catalogInput, setCatalog] = useState ({
+        name : '',
+        description : '',
+        category : [],
+        // image,
+        error_list: []
+    });
     const [error, setError] = useState({});
 
     //validar se usuario pode acessar determinada catalogo.
@@ -32,24 +39,35 @@ function EditCatalog(props){
         setCatalog({...catalogInput, [e.target.name] : e.target.value})
     }
 
+    const handlePicture = (e) => {
+        e.persist();
+        setPicture({picture : e.target.files[0]})
+    }
+
     const updateCatalog = (e) => {
+
         e.preventDefault();
         const catalog_id = props.match.params.id;
-        const data = catalogInput;
-        axios.put(`/api/update-catalog/${catalog_id}`, data).then(res=>{
-            if(res.data.status === 200){
-                swal("Success", res.data.message, "success");
-                setError([]);
-                history.push('/admin/view-catalog');
-            }else if(res.data.status === 422){
-                // swal("Error", res.data.message, "error");
-                // setError(res.data.errors);
-                history.push('/admin/view-catalog');
-            }else if(res.data.status === 404){
-                // swal("Error", res.data.message, "error");
-                history.push('/admin/view-catalog');
-            }
-        });
+        const formData = new FormData();
+        formData.append('image', picture.picture);
+        formData.append('name', catalogInput.name);
+        console.log(catalogInput.name)
+        formData.append('description', catalogInput.description);
+        formData.append('category', catalogInput.category);
+
+        // axios.put(`/api/update-catalog/${catalog_id}`, formData).then(res=>{
+        //     if(res.data.status === 200){
+        //         swal("Success", res.data.message, "success");
+        //         // history.push('/admin/view-catalog');
+        //     }else if(res.data.status === 422){
+        //         // swal("Error", res.data.message, "error");
+        //         // setError(res.data.errors);
+        //         history.push('/admin/view-catalog');
+        //     }else if(res.data.status === 404){
+        //         // swal("Error", res.data.message, "error");
+        //         history.push('/admin/view-catalog');
+        //     }
+        // });
     }
 
 
@@ -63,6 +81,8 @@ function EditCatalog(props){
             )   
         });
     }
+
+    var itemImg = (catalogInput.image)?catalogInput.image:'uploads/catalog/default.jpg';
 
     return(
         <div>
@@ -79,11 +99,16 @@ function EditCatalog(props){
                         <textarea type="text" name="description" onChange={handleInput} value={catalogInput.description} className="form-control"></textarea>
                         <span> {error.description} </span>
                     </div>
-                    {/* <div className="form-group mb-3">
+                    <div className="form-group mb-3">
                         <label>Imagem</label>
-                        <input type="file" name="name" className="form-control"></input>
+                        <input type="file" name="picture" onChange={handlePicture} className="form-control"></input>
                         <span>  </span>
-                    </div> */}
+                    </div>
+                    <div className="form-group mb-3">
+                        <label>Imagem atual</label><br></br>
+                        <img src={`${axios.defaults.baseURL}/${itemImg}`} alt="..." className="img-thumbnail"/>
+                        <span>  </span>
+                    </div>
                     <div className="form-group mb-3">
                         <label>Categorias</label>
                         <select className="form-select" onChange={handleInput} value={catalogInput.category} name="category" aria-label="Default select example">

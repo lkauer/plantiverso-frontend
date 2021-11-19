@@ -49,10 +49,10 @@ const Sidebar = () => {
                                     <Link className="nav-link" to="/admin/view-general-forum">Tópicos gerais</Link>
                                 </nav>
                             </div>
-                            <Link className="nav-link" to="/admin/profile">
+                            {/* <Link className="nav-link" to="/admin/profile">
                                 <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                                 Perfil
-                            </Link> 
+                            </Link>  */}
                         </div>
                     </div>
                 </nav>

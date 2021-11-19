@@ -38,12 +38,14 @@ function ViewCatalog(){
         return <h4>Loading catalog...</h4>
     }else{
         ViewCatalog_HTMLTABLE = catalogList.map((item) => {
+
+            var itemImg = (item.image)?item.image:'uploads/catalog/default.jpg'
             return (
-                <tr key={item.id}>
+                <tr>
                     <td>{item.name}</td>
                     <td>{item.description}</td>
                     <td>{item.category}</td>
-                    <td> <img src="https://media.istockphoto.com/photos/monstera-in-a-pot-isolated-on-white-background-close-up-of-tropical-picture-id1278906674?b=1&k=20&m=1278906674&s=170667a&w=0&h=PRsEw9KpsggCTUEqH_DqgtEKRt884wAGfQCQTeS8xBY=" alt="..." class="img-thumbnail"/></td>
+                    <td> <img src={`${axios.defaults.baseURL}/${itemImg}`} alt="..." className="img-thumbnail"/></td>
                     <td> <Link to={`edit-catalog/${item.id}`}> <button className="btn btn-warning">Editar</button> </Link> </td>
                     <td> <button onClick={ (e) => deleteCatalog(e, item.id)}className="btn btn-danger">Excluir</button></td>
                 </tr>
@@ -55,7 +57,7 @@ function ViewCatalog(){
         <div>
             <div className="container py-5">
                 <h1>Listar itens do catálogo</h1>
-                <table class="table">
+                <table className="table">
                     <thead>
                         <tr>
                         <th scope="col">Nome</th>

@@ -23,16 +23,14 @@ function ViewGeneralForum(){
     }else{
         ViewForum_HTML = forumList.map((item) => {
             return (
-                <div>
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">{item.title}</h5>
+                <div className="list-group-item list-group-item-action" aria-current="true">
+                    <div className="d-flex w-100 justify-content-between">
+                    <h5 className="mb-1">{item.title}</h5>
                     <small>20/05/1999</small>
                     <Link to={`open-forum/${item.id}`}> <button className="btn btn-primary">Acessar</button> </Link>
                     </div>
                     <br></br>
-                    <p class="mb-1">{item.description}</p>
-                </a>
+                    <p className="mb-1">{item.description}</p>
                 <br></br>
                 </div>
             )   
@@ -44,7 +42,7 @@ function ViewGeneralForum(){
         <div>
             <div className="container py-5">
                 <h1>Forum - Tópicos</h1>
-                <div class="list-group">
+                <div className="list-group">
                     {ViewForum_HTML}
                 </div>
             </div>

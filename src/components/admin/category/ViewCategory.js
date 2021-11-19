@@ -39,7 +39,7 @@ function ViewCategory(){
     }else{
         ViewCategory_HTMLTABLE = categoryList.map((item) => {
             return (
-                <tr key={item.id}> 
+                <tr> 
                     <td>{item.name}</td>
                     <td>{item.description}</td>
                     <td> <Link to={`edit-category/${item.id}`}> <button className="btn btn-warning">Editar</button> </Link> </td>
