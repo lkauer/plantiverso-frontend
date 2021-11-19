@@ -12,6 +12,7 @@ import ViewGeneralForum from '../components/admin/forum/ViewGeneralForum';
 import EditForum from '../components/admin/forum/EditForum';
 import OpenForum from '../components/admin/forum/OpenForum';
 import Chat from '../components/admin/Chat';
+import ResultPage from '../components/admin/ResulPage';
 
 const routes = [
     {path: '/admin', exact: true, name: 'Admin'},
@@ -29,6 +30,7 @@ const routes = [
     {path: '/admin/edit-forum/:id', exact: true, name: 'EditForum', component: EditForum},
     {path: '/admin/open-forum/:id', exact: true, name: 'OpenForum', component: OpenForum},
     {path: '/admin/chat', exact: true, name: 'Chat', component: Chat},
+    {path: '/admin/result-page/:searchcontent', exact: true, name: 'ResultPage', component: ResultPage},
 ];
 
 export default routes;

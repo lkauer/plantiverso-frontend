@@ -2,14 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 
-function Feed(){
-
+function ResultPage(props){
+    // console.log(props.match.params.searchcontent);
     const [loading, setLoading] = useState(true);
-    const [searchContent, setSearchContent] = useState([]);
-    
     const [catalogList, setCatalogList] = useState([]);
     useEffect(() => {
-        axios.get(`/api/all-catalog-itens`).then(res => {
+        axios.get(`/api/general-search/${props.match.params.searchcontent}`).then(res => { //criar metodo
+            console.log('teste')
+            console.log(res.data.catalog)
             if(res.status === 200){
                 setCatalogList(res.data.catalog);
             }
@@ -17,12 +17,6 @@ function Feed(){
         });
 
     }, []);
-
-
-    const handleSearchInput = (e) => {
-        e.persist();
-        setSearchContent({...searchContent, [e.target.name] : e.target.value})
-    }
 
 
     var ViewCatalog_HTMLTABLE = "";
@@ -48,15 +42,9 @@ function Feed(){
     return(
         <div>
             <div className="container py-5">
-                <div>
-                    <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                        <div className="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                            <input className="form-control" type="text" onChange={handleSearchInput} name="searchContent" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                            <Link to={`result-page/${searchContent.searchContent}`}><button className="btn btn-primary" type="button">Pesquisar</button></Link>
-                        </div>
-                        <br></br>
-                    </div>
-                </div>
+                <h1>Resultado da busca</h1>
+                
+                <p>Filtro baseado em titulo, descrição (do item do catalogo) e nome de categoria.</p>
                 <br></br>
                     <div>
                     {ViewCatalog_HTMLTABLE}
@@ -68,4 +56,4 @@ function Feed(){
     );
 }
 
-export default Feed;
+export default ResultPage;
