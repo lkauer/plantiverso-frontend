@@ -16,9 +16,7 @@ function EditCatalog(props){
         // image,
         error_list: []
     });
-    const [error, setError] = useState({});
 
-    //validar se usuario pode acessar determinada catalogo.
     useEffect(() => {
         const catalog_id = props.match.params.id;
         axios.get(`/api/edit-catalog/${catalog_id}`).then(res => {
@@ -33,6 +31,7 @@ function EditCatalog(props){
         });
 
     }, [props.match.params.id, history]);
+
 
     const handleInput = (e) => {
         e.persist();
@@ -49,27 +48,26 @@ function EditCatalog(props){
         e.preventDefault();
         const catalog_id = props.match.params.id;
         const formData = new FormData();
+        console.log(catalogInput.name);
+        console.log(catalogInput.description);
+        console.log(catalogInput.category);
+        console.log(picture.picture);
         formData.append('image', picture.picture);
         formData.append('name', catalogInput.name);
         formData.append('description', catalogInput.description);
         formData.append('category', catalogInput.category);
-
-        // axios.put(`/api/update-catalog/${catalog_id}`, formData).then(res=>{
-        //     if(res.data.status === 200){
-        //         swal("Success", res.data.message, "success");
-        //         // history.push('/admin/view-catalog');
-        //     }else if(res.data.status === 422){
-        //         // swal("Error", res.data.message, "error");
-        //         // setError(res.data.errors);
-        //         history.push('/admin/view-catalog');
-        //     }else if(res.data.status === 404){
-        //         // swal("Error", res.data.message, "error");
-        //         history.push('/admin/view-catalog');
-        //     }
-        // });
+        
+        axios.post(`/api/update-catalog/${catalog_id}`, formData).then(res=>{
+            console.log(res);
+            if(res.data.status === 200){
+                swal("Success", res.data.message, "success");
+                history.push('/admin/view-catalog');
+            }else if(res.data.status === 400){
+                setCatalog({ ...catalogInput, error_list : res.data.errors});
+            }
+        });
     }
-
-
+    
     var categories_HTMLTABLE = "";
     if(loading){
         return <h4>Loading ...</h4>
@@ -80,23 +78,22 @@ function EditCatalog(props){
             )   
         });
     }
-
     var itemImg = (catalogInput.image)?catalogInput.image:'uploads/catalog/default.jpg';
 
     return(
         <div>
             <div className="container py-5">
-                <h1>Catálogo</h1>
+                <h1>Editar item ao catálogo</h1>
                 <form onSubmit={updateCatalog}>
                     <div className="form-group mb-3">
                         <label>Titulo</label>
                         <input type="text" name="name" onChange={handleInput} value={catalogInput.name} className="form-control"></input>
-                        <small className="text-danger"> {error.name}</small>
+                        {/* <span> {catalogInput.error_list.name} </span> */}
                     </div>
                     <div className="form-group mb-3">
                         <label>Descrição</label>
                         <textarea type="text" name="description" onChange={handleInput} value={catalogInput.description} className="form-control"></textarea>
-                        <span> {error.description} </span>
+                        {/* <span> {catalogInput.error_list.description} </span> */}
                     </div>
                     <div className="form-group mb-3">
                         <label>Imagem</label>

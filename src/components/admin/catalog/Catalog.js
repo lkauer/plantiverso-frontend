@@ -49,7 +49,7 @@ function Catalog(){
         formData.append('name', catalogInput.name);
         formData.append('description', catalogInput.description);
         formData.append('category', catalogInput.category);
-
+        
         axios.post(`/api/store-catalog`, formData).then( res => {
             if(res.data.status === 200){
                 swal("Success", res.data.message, "success");

@@ -44,7 +44,7 @@ function ResultPage(props){
             <div className="container py-5">
                 <h1>Resultado da busca</h1>
                 
-                <p>Filtro baseado em titulo, descrição (do item do catalogo).</p>
+                <p>Filtro baseado em titulo e descrição do item do catalogo.</p>
                 <br></br>
                     <div>
                     {ViewCatalog_HTMLTABLE}
