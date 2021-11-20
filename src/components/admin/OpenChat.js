@@ -1,27 +1,30 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link, useHistory} from 'react-router-dom';
 import swal from 'sweetalert';
-import { Link, useHistory } from 'react-router-dom';
 
-function OpenForum(props){
-    const history = useHistory();
+function OpenChat(props){
+    
     const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState({});
-    const [postList, setPostList] = useState([]);
-    const [forum, setForum] = useState({});
+    const [chatList, setChatList] = useState([]);
+    const [chat, setChat] = useState({});
+    const history = useHistory();
 
     useEffect(() => {
-        const forum_id = props.match.params.id;
-        axios.get(`/api/open-forum/${forum_id}`).then(res => {
-            if(res.data.status === 200){
-                setPostList(res.data.forumPost);
-                setForum(res.data.forum)
-            }else if(res.data.status === 404){
-                swal("Error", res.data.message, "error");
-                history.push('/admin/view-forum');
-            }
-            setLoading(false);
-        });
+            const chat_id = props.match.params.id;
+        setInterval(function() {
+            axios.get(`/api/open-chat/${chat_id}`).then(res => {
+                if(res.data.status === 200){
+                    setChatList(res.data.chatPost);
+                    setChat(res.data.chat)
+                }else if(res.data.status === 404){
+                    swal("Error", res.data.message, "error");
+                    history.push('/admin/chat');
+                }
+                setLoading(false);
+            });
+
+        }, 10000);
 
     }, [props.match.params.id, history]);
 
@@ -39,23 +42,23 @@ function OpenForum(props){
         e.preventDefault();
         const data = {
             content: contentInput.content,
-            forum_id: props.match.params.id
+            chat_id: props.match.params.id
         }
 
-        axios.post(`/api/store-forum-post`, data).then( res => {
+        axios.post(`/api/store-chat-post`, data).then( res => {
             if(res.data.status === 200){
-                history.push('/admin/view-forum');
+                history.push('/admin/chat');
             }else if(res.data.status === 400){
                 swal("Error", res.data.message, "error");
             }
         });
     }
 
-    var forumPosts_HTML = "";
+    var chatPosts_HTML = "";
     if(loading){
-        return <h4>Loading forum topic information...</h4>
+        return <h4>Loading chat information...</h4>
     }else{
-        forumPosts_HTML = postList.map((item) => {
+        chatPosts_HTML = chatList.map((item) => {
             return (
                 <div className="list-group-item list-group-item-action" aria-current="true">
                     <div className="d-flex w-100 justify-content-between">
@@ -68,31 +71,32 @@ function OpenForum(props){
             )   
         });
     }
-    
+
+    console.log(chat)
     return(
         <div>
             <div className="container py-5">
-                <h1>{forum.title}</h1>
-                <h4> {forum.description}</h4>
                 <div className="list-group">
-                    {forumPosts_HTML}
+                    <h4> Conversa com {chat.chatUserA } e {chat.chatUserB}</h4>
+                    {chatPosts_HTML}
                 </div>
                 <div className="list-group">
                     <form onSubmit={submitPost}>
                         <div className="form-group mb-3">
-                            <label>Participe da discussão:</label>
+                            <label>Enviar mensagem:</label>
                             <textarea type="text" name="content" onChange={handleInput} value={contentInput.content} className="form-control"></textarea>
                             <small className="text-danger"> </small>
                         </div>
                         <div className="form-group mb-3">
                             <button type="submit" className="btn btn-primary" style={{margin:"5px"}}> Enviar </button>
-                            <Link to="/admin/view-general-forum" className="btn btn-secondary"> Voltar </Link>
+                            <Link to="/admin/chat" className="btn btn-secondary"> Voltar </Link>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    );
+        
+    )
 }
 
-export default OpenForum;
+export default OpenChat;
