@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.js'
 
 ReactDOM.render(
-  <App />,
+  <BrowserRouter>
+  <App />
+  </BrowserRouter>,
   document.getElementById('root')
 );
