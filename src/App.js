@@ -34,6 +34,9 @@ class App extends Component {
             </Route>
             <AdminPrivateRoute path="/admin" name="Admin" />
             {/* <Route path="/admin" name="Admin" render={(props) => <MainLayout {...props} />} /> */}
+            <Route path="*">
+                <Redirect to='/'/>
+            </Route>
           </Switch>
         </Router>
       </div>
